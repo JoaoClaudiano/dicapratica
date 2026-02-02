@@ -219,7 +219,7 @@ fetch('assets/data/tutorials.json')
     displayCards(tutorials);
   })
   .catch(error => {
-    console.error('Erro ao carregar tutoriais:', error);
+    console.error('Erro ao carregar tutoriais:', error.message || error);
     container.innerHTML = '<p>Erro ao carregar tutoriais. Por favor, tente novamente.</p>';
   });
 
