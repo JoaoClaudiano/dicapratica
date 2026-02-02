@@ -7,7 +7,7 @@
 <meta name="description" content="DicaPrática: encontre tutoriais práticos sobre culinária, região Nordeste, tecnologia e mais. Busque, filtre por categoria e destaque tutoriais úteis.">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  /* Geral */
+  /* ---------- Geral ---------- */
   body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -41,7 +41,7 @@
     padding: 0 15px;
   }
 
-  /* Cards */
+  /* ---------- Cards ---------- */
   #tutorial-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
@@ -68,7 +68,7 @@
   }
   .card a:hover { text-decoration: underline; }
 
-  /* Search */
+  /* ---------- Busca ---------- */
   #search-input {
     width: 100%;
     max-width: 500px;
@@ -79,7 +79,7 @@
     outline: none;
   }
 
-  /* Filtros categoria */
+  /* ---------- Filtros categoria ---------- */
   #category-filters {
     margin-top: 20px;
     display: flex;
@@ -100,7 +100,7 @@
     background: #0056b3;
   }
 
-  /* Dark mode */
+  /* ---------- Dark mode ---------- */
   .dark-mode {
     background: #121212;
     color: #f7f7f7;
@@ -114,7 +114,7 @@
   .dark-mode #category-filters button { background: #BB86FC; color: #121212; }
   .dark-mode #category-filters button:hover { background: #9a66e0; }
 
-  /* Botão scroll topo */
+  /* ---------- Botão scroll topo ---------- */
   #scroll-top {
     position: fixed;
     bottom: 30px;
@@ -174,23 +174,27 @@
 <button id="scroll-top">↑</button>
 
 <script>
-const tutorials = [
-  {title: "Como diferenciar feijão branco de feijão-caupi", category: "Cozinha", url: "tutorials/feijao-branco-caupi.html", summary: "Aprenda a identificar feijão branco e feijão-caupi, com dicas práticas e receitas.", highlight:true},
-  {title: "Como diferenciar colorau da páprica", category: "Cozinha", url: "tutorials/colorau-paprica.html", summary: "Descubra como diferenciar colorau da páprica, dicas culinárias e visuais.", highlight:false},
-  {title: "Como subir em um coqueiro com segurança", category: "Nordeste", url: "tutorials/subir-coqueiro.html", summary: "Aprenda técnicas seguras para subir em coqueiros e colher cocos.", highlight:true},
-  {title: "Como saber se coco seco está estragado", category: "Nordeste", url: "tutorials/coco-seco.html", summary: "Identifique sinais de coco seco estragado com dicas práticas.", highlight:false},
-  // adicione todos os tutoriais aqui
-];
+let tutorials = [];
 
-const input = document.getElementById("search-input");
+// Carrega JSON externo
+fetch('assets/data/tutorials.json')
+  .then(response => response.json())
+  .then(data => {
+    tutorials = data;
+    displayCards(tutorials);
+  })
+  .catch(err => console.error('Erro ao carregar tutoriais:', err));
+
+// Cria os cards dinamicamente
 const container = document.getElementById("tutorial-cards");
+const input = document.getElementById("search-input");
 
 function displayCards(list) {
   container.innerHTML = "";
   list.forEach(t => {
     const card = document.createElement("div");
     card.classList.add("card");
-    if(t.highlight) card.style.border = "2px solid #FF9800"; // destaque visual
+    if(t.highlight) card.style.border = "2px solid #FF9800"; // destaque
     card.innerHTML = `
       <h3>${t.title}</h3>
       <p>${t.summary}</p>
@@ -200,14 +204,17 @@ function displayCards(list) {
   });
 }
 
-// Filtrar pesquisa
+// Pesquisa em tempo real
 input.addEventListener("input", () => {
   const query = input.value.toLowerCase();
-  const filtered = tutorials.filter(t => t.title.toLowerCase().includes(query) || t.summary.toLowerCase().includes(query));
+  const filtered = tutorials.filter(t => 
+    t.title.toLowerCase().includes(query) || 
+    t.summary.toLowerCase().includes(query)
+  );
   displayCards(filtered);
 });
 
-// Filtrar por categoria
+// Filtro por categoria
 const buttons = document.querySelectorAll("#category-filters button");
 buttons.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -217,9 +224,6 @@ buttons.forEach(btn => {
   });
 });
 
-// Inicializa com todos os tutoriais
-displayCards(tutorials);
-
 // Dark Mode
 const darkModeBtn = document.getElementById("dark-mode-btn");
 darkModeBtn.addEventListener("click", () => {
@@ -227,7 +231,7 @@ darkModeBtn.addEventListener("click", () => {
   darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
 });
 
-// Botão scroll top
+// Scroll-top
 const scrollBtn = document.getElementById("scroll-top");
 window.addEventListener("scroll", () => {
   scrollBtn.style.display = window.scrollY > 200 ? "block" : "none";
