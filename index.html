@@ -1,49 +1,239 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DicaPrática - Tutoriais úteis passo a passo</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DicaPrática - Tutoriais</title>
+<meta name="description" content="DicaPrática: encontre tutoriais práticos sobre culinária, região Nordeste, tecnologia e mais. Busque, filtre por categoria e destaque tutoriais úteis.">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* Geral */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+    color: #222;
+    transition: background 0.3s, color 0.3s;
+  }
+  header, footer {
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  nav a {
+    text-decoration: none;
+    color: #222;
+    font-weight: bold;
+  }
+  main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+  }
 
+  /* Cards */
+  #tutorial-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .card h3 { margin-top:0; }
+  .card a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #007BFF;
+    text-decoration: none;
+  }
+  .card a:hover { text-decoration: underline; }
+
+  /* Search */
+  #search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+
+  /* Filtros categoria */
+  #category-filters {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  #category-filters button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #category-filters button:hover {
+    background: #0056b3;
+  }
+
+  /* Dark mode */
+  .dark-mode {
+    background: #121212;
+    color: #f7f7f7;
+  }
+  .dark-mode header, .dark-mode footer, .dark-mode .card {
+    background: #1e1e1e;
+    color: #f7f7f7;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .dark-mode nav a { color: #f7f7f7; }
+  .dark-mode #category-filters button { background: #BB86FC; color: #121212; }
+  .dark-mode #category-filters button:hover { background: #9a66e0; }
+
+  /* Botão scroll topo */
+  #scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    z-index: 100;
+  }
+  #scroll-top:hover { background: #0056b3; }
+</style>
+</head>
 <body>
 
 <header>
   <h1>DicaPrática</h1>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="categories/tecnologia.html">Categorias</a>
-    <a href="about.html">Sobre</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="categories/cozinha.html">Cozinha</a></li>
+      <li><a href="categories/nordeste.html">Região Nordeste</a></li>
+      <li><a href="categories/tecnologia.html">Tecnologia</a></li>
+      <li><a href="about.html">Sobre</a></li>
+    </ul>
   </nav>
+  <button id="dark-mode-btn">🌙 Dark Mode</button>
 </header>
 
 <main>
-<section class="categories">
-  <h2>Categorias</h2>
-  <ul>
-    <li><a href="categories/tecnologia.html">Tecnologia</a></li>
-    <li><a href="categories/casa-diy.html">Casa & DIY</a></li>
-    <li><a href="categories/saude-bem-estar.html">Saúde & Bem-estar</a></li>
-    <li><a href="categories/educacao.html">Educação</a></li>
-    <li><a href="categories/vida-pratica.html">Vida prática</a></li>
-  </ul>
-</section>
-
-<section class="featured-tutorials">
-  <h2>Tutoriais em destaque</h2>
-  <ul>
-    <li><a href="tutorials/como-criar-planilha-excel.html">Como criar planilha de controle financeiro no Excel</a></li>
-    <li><a href="tutorials/plantar-temperos-em-casa.html">Como plantar temperos em casa</a></li>
-    <li><a href="tutorials/exercicios-alongamento.html">Exercícios de alongamento para o dia a dia</a></li>
-    <li><a href="tutorials/organizar-armarios.html">Como organizar armários de forma prática</a></li>
-    <li><a href="tutorials/orcamento-mensal.html">Criando orçamento mensal simples</a></li>
-  </ul>
+<section id="search-section">
+  <input type="text" id="search-input" placeholder="Digite sua dúvida ou tutorial...">
+  <div id="category-filters">
+    <button data-cat="All">Todos</button>
+    <button data-cat="Cozinha">Cozinha</button>
+    <button data-cat="Nordeste">Nordeste</button>
+    <button data-cat="Tecnologia">Tecnologia</button>
+  </div>
+  <div id="tutorial-cards"></div>
 </section>
 </main>
 
 <footer>
-  <p>&copy; 2026 DicaPrática | Site de tutoriais úteis passo a passo</p>
+  <p>&copy; 2026 DicaPrática. Todos os direitos reservados.</p>
+  <p>
+    <a href="privacy.html">Política de Privacidade</a> | 
+    <a href="terms.html">Termos de Uso</a> | 
+    <a href="contact.html">Contato</a>
+  </p>
 </footer>
+
+<button id="scroll-top">↑</button>
+
+<script>
+const tutorials = [
+  {title: "Como diferenciar feijão branco de feijão-caupi", category: "Cozinha", url: "tutorials/feijao-branco-caupi.html", summary: "Aprenda a identificar feijão branco e feijão-caupi, com dicas práticas e receitas.", highlight:true},
+  {title: "Como diferenciar colorau da páprica", category: "Cozinha", url: "tutorials/colorau-paprica.html", summary: "Descubra como diferenciar colorau da páprica, dicas culinárias e visuais.", highlight:false},
+  {title: "Como subir em um coqueiro com segurança", category: "Nordeste", url: "tutorials/subir-coqueiro.html", summary: "Aprenda técnicas seguras para subir em coqueiros e colher cocos.", highlight:true},
+  {title: "Como saber se coco seco está estragado", category: "Nordeste", url: "tutorials/coco-seco.html", summary: "Identifique sinais de coco seco estragado com dicas práticas.", highlight:false},
+  // adicione todos os tutoriais aqui
+];
+
+const input = document.getElementById("search-input");
+const container = document.getElementById("tutorial-cards");
+
+function displayCards(list) {
+  container.innerHTML = "";
+  list.forEach(t => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    if(t.highlight) card.style.border = "2px solid #FF9800"; // destaque visual
+    card.innerHTML = `
+      <h3>${t.title}</h3>
+      <p>${t.summary}</p>
+      <a href="${t.url}">Ver Tutorial</a>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// Filtrar pesquisa
+input.addEventListener("input", () => {
+  const query = input.value.toLowerCase();
+  const filtered = tutorials.filter(t => t.title.toLowerCase().includes(query) || t.summary.toLowerCase().includes(query));
+  displayCards(filtered);
+});
+
+// Filtrar por categoria
+const buttons = document.querySelectorAll("#category-filters button");
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const cat = btn.getAttribute("data-cat");
+    if(cat === "All") displayCards(tutorials);
+    else displayCards(tutorials.filter(t => t.category === cat));
+  });
+});
+
+// Inicializa com todos os tutoriais
+displayCards(tutorials);
+
+// Dark Mode
+const darkModeBtn = document.getElementById("dark-mode-btn");
+darkModeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+});
+
+// Botão scroll top
+const scrollBtn = document.getElementById("scroll-top");
+window.addEventListener("scroll", () => {
+  scrollBtn.style.display = window.scrollY > 200 ? "block" : "none";
+});
+scrollBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+</script>
+
 </body>
 </html>
