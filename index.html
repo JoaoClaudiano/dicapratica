@@ -174,13 +174,7 @@
 <button id="scroll-top">↑</button>
 
 <script>
-const tutorials = [
-  {title: "Como diferenciar feijão branco de feijão-caupi", category: "Cozinha", url: "tutorials/feijao-branco-caupi.html", summary: "Aprenda a identificar feijão branco e feijão-caupi, com dicas práticas e receitas.", highlight:true},
-  {title: "Como diferenciar colorau da páprica", category: "Cozinha", url: "tutorials/colorau-paprica.html", summary: "Descubra como diferenciar colorau da páprica, dicas culinárias e visuais.", highlight:false},
-  {title: "Como subir em um coqueiro com segurança", category: "Nordeste", url: "tutorials/subir-coqueiro.html", summary: "Aprenda técnicas seguras para subir em coqueiros e colher cocos.", highlight:true},
-  {title: "Como saber se coco seco está estragado", category: "Nordeste", url: "tutorials/coco-seco.html", summary: "Identifique sinais de coco seco estragado com dicas práticas.", highlight:false},
-  // adicione todos os tutoriais aqui
-];
+let tutorials = [];
 
 const input = document.getElementById("search-input");
 const container = document.getElementById("tutorial-cards");
@@ -217,8 +211,17 @@ buttons.forEach(btn => {
   });
 });
 
-// Inicializa com todos os tutoriais
-displayCards(tutorials);
+// Carregar tutoriais do JSON e inicializar
+fetch('assets/data/tutorials.json')
+  .then(response => response.json())
+  .then(data => {
+    tutorials = data;
+    displayCards(tutorials);
+  })
+  .catch(error => {
+    console.error('Erro ao carregar tutoriais:', error);
+    container.innerHTML = '<p>Erro ao carregar tutoriais. Por favor, tente novamente.</p>';
+  });
 
 // Dark Mode
 const darkModeBtn = document.getElementById("dark-mode-btn");
