@@ -6,6 +6,7 @@
 <title>DicaPrática - Tutoriais</title>
 <meta name="description" content="DicaPrática: encontre tutoriais práticos sobre culinária, região Nordeste, tecnologia e mais. Busque, filtre por categoria e destaque tutoriais úteis.">
 <link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -27,12 +28,14 @@
 <main>
 <section id="search-section">
   <input type="text" id="search-input" placeholder="Digite sua dúvida ou tutorial...">
+  
   <div id="category-filters">
     <button data-cat="All">Todos</button>
     <button data-cat="Cozinha">Cozinha</button>
     <button data-cat="Nordeste">Nordeste</button>
     <button data-cat="Tecnologia">Tecnologia</button>
   </div>
+  
   <div id="tutorial-cards"></div>
 </section>
 </main>
@@ -60,7 +63,7 @@ fetch('assets/data/tutorials.json')
   })
   .catch(err => console.error('Erro ao carregar tutoriais:', err));
 
-// Função para criar os cards dinamicamente
+// Função para criar cards dinamicamente
 const container = document.getElementById("tutorial-cards");
 const input = document.getElementById("search-input");
 
@@ -106,7 +109,7 @@ darkModeBtn.addEventListener("click", () => {
   darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
 });
 
-// Botão scroll-top
+// Scroll-top
 const scrollBtn = document.getElementById("scroll-top");
 window.addEventListener("scroll", () => {
   scrollBtn.style.display = window.scrollY > 200 ? "block" : "none";
