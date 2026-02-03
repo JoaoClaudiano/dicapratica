@@ -12,8 +12,10 @@
 
 <header>
   <h1>DicaPrática</h1>
+  
+  <div id="menu-toggle">☰</div>
   <nav>
-    <ul>
+    <ul id="menu-list">
       <li><a href="index.html">Home</a></li>
       <li><a href="categories/cozinha.html">Cozinha</a></li>
       <li><a href="categories/nordeste.html">Região Nordeste</a></li>
@@ -22,6 +24,7 @@
       <li><a href="contact.html">Contato</a></li>
     </ul>
   </nav>
+  
   <button id="dark-mode-btn">🌙 Dark Mode</button>
 </header>
 
@@ -63,16 +66,16 @@ fetch('assets/data/tutorials.json')
   })
   .catch(err => console.error('Erro ao carregar tutoriais:', err));
 
-// Função para criar cards dinamicamente
 const container = document.getElementById("tutorial-cards");
 const input = document.getElementById("search-input");
 
+// Cria cards
 function displayCards(list) {
   container.innerHTML = "";
   list.forEach(t => {
     const card = document.createElement("div");
     card.classList.add("card");
-    if(t.highlight) card.style.border = "2px solid #FF9800"; // destaque visual
+    if(t.highlight) card.style.border = "2px solid #FF9800";
     card.innerHTML = `
       <h3>${t.title}</h3>
       <p>${t.summary}</p>
@@ -92,7 +95,7 @@ input.addEventListener("input", () => {
   displayCards(filtered);
 });
 
-// Filtro por categoria
+// Filtros por categoria
 const buttons = document.querySelectorAll("#category-filters button");
 buttons.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -115,6 +118,13 @@ window.addEventListener("scroll", () => {
   scrollBtn.style.display = window.scrollY > 200 ? "block" : "none";
 });
 scrollBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+
+// Menu hamburguer mobile
+const menuToggle = document.getElementById("menu-toggle");
+const menuList = document.getElementById("menu-list");
+menuToggle.addEventListener("click", () => {
+  menuList.classList.toggle("show");
+});
 </script>
 
 </body>
